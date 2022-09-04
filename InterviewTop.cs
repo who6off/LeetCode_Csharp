@@ -1,7 +1,37 @@
 ﻿namespace LeetCode
 {
-    internal static class InterviewTop
+    public static class InterviewTop
     {
+        //https://leetcode.com/problems/roman-to-integer/
+        static public int RomanToInt(string s)
+        {
+            var romanToArabic = new Dictionary<char, int>()
+            {
+                {'I', 1 },
+                {'V', 5 },
+                {'X', 10 },
+                {'L', 50 },
+                {'C', 100 },
+                {'D', 500 },
+                {'M', 1000 }
+            };
+            int result = romanToArabic[s[s.Length - 1]];
+
+            for (int i = s.Length - 2; i >= 0; i--)
+            {
+                if (romanToArabic[s[i]] < romanToArabic[s[i + 1]])
+                {
+                    result -= romanToArabic[s[i]];
+                }
+                else
+                {
+                    result += romanToArabic[s[i]];
+                }
+            }
+
+            return result;
+        }
+
         //https://leetcode.com/problems/two-sum/
         static public int[] TwoSum(int[] nums, int target)
         {
