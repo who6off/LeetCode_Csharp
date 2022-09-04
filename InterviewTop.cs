@@ -2,6 +2,28 @@
 {
     public static class InterviewTop
     {
+        //https://leetcode.com/problems/longest-common-prefix/
+        static public string LongestCommonPrefix(string[] strs)
+        {
+            string result = "";
+
+            for (int i = 0; i < strs[0].Length; i++)
+            {
+                result += strs[0][i];
+
+                for (int j = 1; j < strs.Length; j++)
+                {
+                    if (strs[j].IndexOf(result) != 0)
+                    {
+                        return strs[0].Substring(0, i);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+
         //https://leetcode.com/problems/roman-to-integer/
         static public int RomanToInt(string s)
         {
