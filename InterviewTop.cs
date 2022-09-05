@@ -1,7 +1,44 @@
 ﻿namespace LeetCode
 {
+    //https://leetcode.com/problem-list/top-interview-questions/
     public static class InterviewTop
     {
+        //------EASY---------------------------------------------------------
+        //https://leetcode.com/problems/valid-parentheses/
+        static public bool IsValid(string s)
+        {
+            var stack = new Stack<char>();
+            var parentheses = new Dictionary<char, char>()
+            {
+                { '(', ')' },
+                { '{', '}' },
+                { '[', ']' },
+            };
+
+            foreach (var ch in s)
+            {
+                if (parentheses.ContainsKey(ch))
+                {
+                    stack.Push(ch);
+                }
+                else if (parentheses.ContainsValue(ch))
+                {
+                    if (
+                        !stack.TryPop(out char openingParanthes) ||
+                        parentheses[openingParanthes] != ch
+                    )
+                    {
+                        return false;
+                    }
+
+                    Console.WriteLine(openingParanthes);
+                }
+            }
+
+            return stack.Count == 0;
+        }
+
+
         //https://leetcode.com/problems/longest-common-prefix/
         static public string LongestCommonPrefix(string[] strs)
         {
