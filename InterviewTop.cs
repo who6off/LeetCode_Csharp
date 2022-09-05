@@ -4,6 +4,55 @@
     public static class InterviewTop
     {
         //------EASY---------------------------------------------------------
+        //https://leetcode.com/problems/merge-two-sorted-lists/
+        static public ListNode? MergeTwoLists(ListNode list1, ListNode list2)
+        {
+            if (list1 == null && list2 == null) return null;
+            if (list1 == null) return CopyList(list2);
+            if (list2 == null) return CopyList(list1);
+
+            var list1Copy = CopyList(list1);
+            var list1Ptr = list1Copy;
+            var list2Ptr = list2;
+            ListNode? prevList1Ptr = null;
+
+            while (list1Ptr != null && list2Ptr != null)
+            {
+                if (list2Ptr.val <= list1Ptr.val)
+                {
+                    var tmp = list1Ptr.val;
+                    list1Ptr.val = list2Ptr.val;
+                    list1Ptr.next = new ListNode(tmp, list1Ptr.next);
+                    list2Ptr = list2Ptr.next;
+                }
+
+                prevList1Ptr = list1Ptr;
+                list1Ptr = list1Ptr.next;
+            }
+
+            if (list2Ptr != null && prevList1Ptr != null)
+            {
+                prevList1Ptr.next = CopyList(list2Ptr);
+            }
+
+            return list1Copy;
+
+            ListNode CopyList(ListNode lst)
+            {
+                var result = new ListNode(lst.val);
+                var tail = result;
+                var tailInput = lst.next;
+                while (tailInput != null)
+                {
+                    tail.next = new ListNode(tailInput.val);
+                    tail = tail.next;
+                    tailInput = tailInput.next;
+                }
+
+                return result;
+            }
+        }
+
         //https://leetcode.com/problems/valid-parentheses/
         static public bool IsValid(string s)
         {
@@ -42,7 +91,7 @@
         //https://leetcode.com/problems/longest-common-prefix/
         static public string LongestCommonPrefix(string[] strs)
         {
-            string result = "";
+            var result = "";
 
             for (int i = 0; i < strs[0].Length; i++)
             {
@@ -74,7 +123,7 @@
                 {'D', 500 },
                 {'M', 1000 }
             };
-            int result = romanToArabic[s[s.Length - 1]];
+            var result = romanToArabic[s[s.Length - 1]];
 
             for (int i = s.Length - 2; i >= 0; i--)
             {
