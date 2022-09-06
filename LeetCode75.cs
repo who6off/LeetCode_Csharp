@@ -1,4 +1,6 @@
-﻿namespace LeetCode
+﻿using System.Text;
+
+namespace LeetCode
 {
     //https://leetcode.com/study-plan/leetcode-75/?progress=x9mpl2n6
     static public class LeetCode75
@@ -33,6 +35,47 @@
             }
 
             return left == 0 ? nums.Length - 1 : -1;
+        }
+
+        //----------- Day 2 --------------------
+        //https://leetcode.com/problems/isomorphic-strings/
+        static public bool IsIsomorphic(string s, string t)
+        {
+            if (s.Length != t.Length) return false;
+
+            var map = new Dictionary<char, char>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (map.ContainsKey(s[i]) && map[s[i]] != t[i])
+                    return false;
+
+                if (map.ContainsValue(t[i]))
+                {
+                    var key = map.FirstOrDefault(x => x.Value == t[i]).Key;
+                    if (key != s[i]) return false;
+                }
+
+                map.TryAdd(s[i], t[i]);
+            }
+
+            return true;
+        }
+
+        //https://leetcode.com/problems/is-subsequence/
+        static public bool IsSubsequence(string s, string t)
+        {
+            var subsequence = new StringBuilder(s.Length);
+            for (int i = 0, j = 0; i < t.Length && j < s.Length; i++)
+            {
+                if (t[i] == s[j])
+                {
+                    subsequence.Append(t[i]);
+                    j++;
+                }
+            }
+
+            return s == subsequence.ToString();
         }
     }
 }
