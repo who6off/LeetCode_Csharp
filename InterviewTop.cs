@@ -42,6 +42,7 @@
                 var result = new ListNode(lst.val);
                 var tail = result;
                 var tailInput = lst.next;
+
                 while (tailInput != null)
                 {
                     tail.next = new ListNode(tailInput.val);
