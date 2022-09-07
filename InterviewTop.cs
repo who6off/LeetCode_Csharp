@@ -3,6 +3,63 @@
     //https://leetcode.com/problem-list/top-interview-questions/
     public static class InterviewTop
     {
+        //------HARD---------------------------------------------------------
+        //https://leetcode.com/problems/merge-k-sorted-lists/
+        static public ListNode? MergeKLists(ListNode[] lists)
+        {
+            lists = lists.Where(i => i != null).ToArray();
+
+            if (lists.Length == 0) return null;
+
+            var result = CopyList(lists[0]);
+
+            for (int i = 1; i < lists.Length; i++)
+            {
+                var resultPtr = result;
+                ListNode? prevResultPtr = null;
+
+                while (resultPtr != null && lists[i] != null)
+                {
+                    if (lists[i].val <= resultPtr.val)
+                    {
+                        var tmp = resultPtr.val;
+                        resultPtr.val = lists[i].val;
+                        resultPtr.next = new ListNode(tmp, resultPtr.next);
+                        lists[i] = lists[i].next;
+                    }
+
+                    prevResultPtr = resultPtr;
+                    resultPtr = resultPtr.next;
+                }
+
+                if (lists[i] != null && prevResultPtr != null)
+                {
+                    prevResultPtr.next = CopyList(lists[i]);
+                }
+            }
+
+            return result;
+
+            ListNode CopyList(ListNode lst)
+            {
+                var result = new ListNode(lst.val);
+                var tail = result;
+                var tailInput = lst.next;
+
+                while (tailInput != null)
+                {
+                    tail.next = new ListNode(tailInput.val);
+                    tail = tail.next;
+                    tailInput = tailInput.next;
+                }
+
+                return result;
+            }
+        }
+
+
+
+
         //------EASY---------------------------------------------------------
         //https://leetcode.com/problems/merge-two-sorted-lists/
         static public ListNode? MergeTwoLists(ListNode list1, ListNode list2)
@@ -53,6 +110,7 @@
                 return result;
             }
         }
+
 
         //https://leetcode.com/problems/valid-parentheses/
         static public bool IsValid(string s)
@@ -141,6 +199,7 @@
             return result;
         }
 
+
         //https://leetcode.com/problems/two-sum/
         static public int[] TwoSum(int[] nums, int target)
         {
@@ -157,8 +216,6 @@
 
             return new int[0];
         }
-
-
 
     }
 }

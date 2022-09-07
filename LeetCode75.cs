@@ -5,6 +5,7 @@ namespace LeetCode
     //https://leetcode.com/study-plan/leetcode-75/?progress=x9mpl2n6
     static public class LeetCode75
     {
+        //-----------------------------------------------------//
         #region Day1
         //https://leetcode.com/problems/running-sum-of-1d-array
         static public int[] RunningSum(int[] nums)
@@ -38,7 +39,9 @@ namespace LeetCode
         }
 
         #endregion
+        //-----------------------------------------------------//
 
+        //-----------------------------------------------------//
         #region Day2
         //https://leetcode.com/problems/isomorphic-strings/
         static public bool IsIsomorphic(string s, string t)
@@ -81,7 +84,10 @@ namespace LeetCode
         }
 
         #endregion
+        //-----------------------------------------------------//
 
+
+        //-----------------------------------------------------//
         #region Day3
         //https://leetcode.com/problems/merge-two-sorted-lists/
         static public ListNode? MergeTwoLists(ListNode list1, ListNode list2) =>
@@ -100,8 +106,12 @@ namespace LeetCode
 
             return result;
         }
-    }
 
-    #endregion
+        #endregion
+        //-----------------------------------------------------//
+
+        //-----------------------------------------------------//
+        //-----------------------------------------------------//
+    }
 }
 
