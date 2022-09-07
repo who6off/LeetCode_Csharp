@@ -5,7 +5,7 @@ namespace LeetCode
     //https://leetcode.com/study-plan/leetcode-75/?progress=x9mpl2n6
     static public class LeetCode75
     {
-        //-------Day 1 -------//
+        #region Day1
         //https://leetcode.com/problems/running-sum-of-1d-array
         static public int[] RunningSum(int[] nums)
         {
@@ -37,7 +37,9 @@ namespace LeetCode
             return left == 0 ? nums.Length - 1 : -1;
         }
 
-        //----------- Day 2 --------------------
+        #endregion
+
+        #region Day2
         //https://leetcode.com/problems/isomorphic-strings/
         static public bool IsIsomorphic(string s, string t)
         {
@@ -77,5 +79,29 @@ namespace LeetCode
 
             return s == subsequence.ToString();
         }
+
+        #endregion
+
+        #region Day3
+        //https://leetcode.com/problems/merge-two-sorted-lists/
+        static public ListNode? MergeTwoLists(ListNode list1, ListNode list2) =>
+            InterviewTop.MergeTwoLists(list1, list2);
+
+        //https://leetcode.com/problems/reverse-linked-list/
+        static public ListNode ReverseList(ListNode head)
+        {
+            ListNode result = null;
+
+            while (head != null)
+            {
+                result = new ListNode(head.val, result);
+                head = head.next;
+            }
+
+            return result;
+        }
     }
+
+    #endregion
 }
+
