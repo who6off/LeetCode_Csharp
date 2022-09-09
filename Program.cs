@@ -5,6 +5,7 @@
     {
         static public void Main()
         {
+            var a = LeetCode75.LongestPalindrome("abccccdd");
             Console.ReadKey();
         }
     }

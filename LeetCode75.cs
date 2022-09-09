@@ -111,7 +111,134 @@ namespace LeetCode
         //-----------------------------------------------------//
 
         //-----------------------------------------------------//
+        #region Day4
+        //https://leetcode.com/problems/middle-of-the-linked-list/
+        static public ListNode MiddleNode(ListNode head)
+        {
+            var ptr = head;
+            var length = 0;
+
+            while (ptr != null)
+            {
+                length++;
+                ptr = ptr.next;
+            }
+
+            ptr = head;
+
+            for (var i = 0; i < length / 2; i++)
+                ptr = ptr.next;
+
+            return ptr;
+        }
+
+        //https://leetcode.com/problems/linked-list-cycle-ii/
+        static public ListNode DetectCycle(ListNode head)
+        {
+            var ptr = head;
+            var length = 0;
+
+            while (ptr != null)
+            {
+                length++;
+
+                var cycledNode = head;
+                for (var i = 0; i < length; i++)
+                {
+                    if (ptr.next == cycledNode)
+                        return cycledNode;
+
+                    cycledNode = cycledNode.next;
+                }
+
+                ptr = ptr.next;
+
+
+            }
+
+            return null;
+        }
+        #endregion
         //-----------------------------------------------------//
+
+        //-----------------------------------------------------//
+        #region Day5
+        //https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+        static public int MaxProfit(int[] prices)
+        {
+            //int result = 0;
+            //int sell, profit;
+
+            //for (int i = 0; i < prices.Length - 1; i++)
+            //{
+            //    sell = prices[i + 1];
+
+            //    for (int j = i + 2; j < prices.Length; j++)
+            //        if (prices[j] > sell) sell = prices[j];
+
+            //    profit = sell - prices[i];
+
+            //    if (profit > result) result = profit;
+            //}
+
+            //return result < 0 ? 0 : result;
+
+            var left = 0;
+            var right = 1;
+            var profit = 0;
+
+            while (right < prices.Length)
+            {
+                var tmp = prices[right] - prices[left];
+
+                if (tmp < 0)
+                    left++;
+                else
+                    right++;
+
+                if (tmp > profit) profit = tmp;
+            }
+
+            return profit;
+        }
+
+        //https://leetcode.com/problems/longest-palindrome
+        static public int LongestPalindrome(string s)
+        {
+            var map = new Dictionary<char, int>();
+            var result = 0;
+
+            foreach (var ch in s)
+            {
+                if (map.ContainsKey(ch))
+                    map[ch]++;
+                else
+                    map.Add(ch, 1);
+            }
+
+            foreach (var (key, value) in map)
+            {
+                var tmp = value % 2;
+
+                if (tmp == 0)
+                {
+                    result += value;
+                    map.Remove(key);
+                }
+                else if ((value != 1) && (tmp != 0))
+                {
+                    result += (value - 1);
+                    map[key] = 1;
+                }
+            }
+
+            if (map.Count > 0) result++;
+
+            return result;
+        }
+
+
+        #endregion
     }
 }
 
