@@ -86,7 +86,6 @@ namespace LeetCode
         #endregion
         //-----------------------------------------------------//
 
-
         //-----------------------------------------------------//
         #region Day3
         //https://leetcode.com/problems/merge-two-sorted-lists/
@@ -236,9 +235,59 @@ namespace LeetCode
 
             return result;
         }
+        #endregion
+        //-----------------------------------------------------//
 
+        //-----------------------------------------------------//
+        #region Day 6
+        //https://leetcode.com/problems/n-ary-tree-preorder-traversal/
+        static public IList<int> Preorder(Node root)
+        {
+            var result = new List<int>();
+
+            Traversal(root);
+
+            return result;
+
+            void Traversal(Node node)
+            {
+                if (node == null) return;
+
+                result.Add(node.val);
+
+                foreach (var child in node.children)
+                    Traversal(child);
+            }
+        }
+
+        //https://leetcode.com/problems/binary-tree-level-order-traversal/
+        static public IList<IList<int>> LevelOrder(TreeNode root)
+        {
+            if (root == null) return Array.Empty<int[]>();
+
+            var result = new List<List<int>>() { };
+
+            Traversal(root, 0);
+
+            return result.ToArray();
+
+            void Traversal(TreeNode? node, int level = 0)
+            {
+                if (node == null) return;
+
+                if (result.Count < level + 1)
+                    result.Add(new List<int>());
+
+                result[level].Add(node.val);
+
+                Traversal(node.left, level + 1);
+                Traversal(node.right, level + 1);
+            }
+        }
 
         #endregion
+        //-----------------------------------------------------//
+
     }
 }
 
